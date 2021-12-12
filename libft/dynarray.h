@@ -6,7 +6,7 @@
 /*   By: nikotikcho <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 12:19:38 by nikotikch         #+#    #+#             */
-/*   Updated: 2021/12/04 16:26:32 by nikotikch        ###   ########.fr       */
+/*   Updated: 2021/12/12 19:02:07 by nikotikch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_dynarray
 	uint64_t	byte_size;
 }				t_dynarray;
 
+int		ft_uatoi(char *str);
 void	*ft_memset(void *s, int c, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 int		init_dynarray(t_dynarray *dynarray,

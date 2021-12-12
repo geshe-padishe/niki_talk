@@ -6,7 +6,6 @@
 
 t_character	c;
 
-
 void	sig1_handler(int i)
 {
 	(void)i;
@@ -17,6 +16,7 @@ void	sig1_handler(int i)
 		push_dynarray(c.darr, &c.character, 1, 0);
 		c.character = '0';
 		c.index = 0;
+		printf("%c\n", c.character);
 	}
 }
 
@@ -30,6 +30,7 @@ void	sig2_handler(int i)
 		push_dynarray(c.darr, &c.character, 1, 0);
 		c.character = '0';
 		c.index = 0;
+		printf("%c\n", c.character);
 	}
 }
 
@@ -49,22 +50,15 @@ int	main(int argc, char **argv)
 	unsigned long i;
 
 	i = 0;
-
 	c.index = 0;
 	c.character = 0;
 	t_dynarray darr;
 	c.darr = &darr;
 	init_dynarray(c.darr, 10, 1);
-	printf("darr *p = %p\n", c.darr);
+
 	signal(SIGUSR1, sig1_handler);
 	signal(SIGUSR2, sig2_handler);
-	for (i = 0; i <= 14; i++)
-	{
-		if (i % 2 == 0)
-			raise(SIGUSR1);
-		else
-			raise(SIGUSR2);
-	}
+
 	printf("\npid = %d\n", getpid());
 	while (c.darr->nb_cells > i)
 	{

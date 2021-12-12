@@ -4,7 +4,7 @@ NAME = libft.a
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC_C = ft_memcpy.c ft_memset.c \
+SRC_C = ft_memcpy.c ft_memset.c ft_uatoi.c\
 		dynarray.c dynarray2.c
 
 INC_H = dynarray.h
