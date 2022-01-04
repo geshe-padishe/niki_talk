@@ -6,31 +6,37 @@ void	sig1_handler(int i)
 {
 	(void)i;
 	c.character |= (000000001 << c.index);
-	if (c.index == 6)
+	printf("c.d = %d ", c.character);
+	printf("c = %c ", c.character);
+	printf("index = %d", c.index);
+	printf(" SIG1\n");
+	c.index++;
+	if (c.index == 7)
 	{
-		printf("c.char = %c\n", c.character);
-		printf("c.char = %d\n", c.character);
+		printf("FINAL D = %d ", c.character);
+		printf("FINAL C = %c\n", c.character);
 		push_dynarray(c.darr, &c.character, 1, 0);
 		c.character = 0;
 		c.index = 0;
-		printf("%c\n", c.character);
 	}
-	c.index++;
 }
 
 void	sig2_handler(int i)
 {
 	(void)i;
-	if (c.index == 6)
+	printf("c.d = %d ", c.character);
+	printf("c = %c ", c.character);
+	printf("index = %d", c.index);
+	printf(" SIG2\n");
+	c.index++;
+	if (c.index == 7)
 	{
-		printf("c.char = %c\n", c.character);
-		printf("c.char = %d\n", c.character);
+		printf("FINAL D = %d ", c.character);
+		printf("FINAL C = %c\n", c.character);
 		push_dynarray(c.darr, &c.character, 1, 0);
 		c.character = 0;
 		c.index = 0;
-		printf("%c\n", c.character);
 	}
-	c.index++;
 }
 
 void	ft_print_nb_base(unsigned int nb, unsigned int base)
@@ -59,12 +65,11 @@ int	main(int argc, char **argv)
 	signal(SIGUSR2, sig2_handler);
 
 	printf("\npid = %d\n", getpid());
-	while (c.darr->nb_cells > i)
-	{
-		printf("%c\n", ((char *)c.darr->list)[i]);
-		i++;
-	}
-	while (1)
-		sleep(1);
+//	while (c.darr->nb_cells > i)
+//	{
+//		printf("%c\n", ((char *)c.darr->list)[i]);
+//		i++;
+//	}
+	while (1);
 	return (0);
 }

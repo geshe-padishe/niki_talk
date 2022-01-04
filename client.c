@@ -16,6 +16,7 @@ int	ft_send_char(char c, int pid)
 	index = 0;
 	while (index < 7)
 	{
+		usleep(1000);
 		if ((c & (000000001 << index)) > 0)
 		{
 			if (kill(pid, SIGUSR1) == -1)
