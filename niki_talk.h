@@ -7,7 +7,7 @@
 # include <sys/types.h>
 # include <stdlib.h>
 # include <string.h>
-#include <signal.h>
+# include <signal.h>
 # include "dynarray.h"
 
 typedef struct s_character

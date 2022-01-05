@@ -6,7 +6,7 @@
 /*   By: nikotikcho <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:28:59 by nikotikch         #+#    #+#             */
-/*   Updated: 2021/12/04 14:21:10 by nikotikch        ###   ########.fr       */
+/*   Updated: 2022/01/05 21:02:16 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	dynarray_realloc(t_dynarray *dynarray, size_t new_byte_size)
 	if (!(ptr))
 		return (-1);
 	free(dynarray->tmp);
-	dynarray->tmp = NULL;
 	dynarray->tmp = malloc(new_byte_size);
 	if (!(dynarray->tmp))
 	{
@@ -29,7 +28,6 @@ int	dynarray_realloc(t_dynarray *dynarray, size_t new_byte_size)
 	}
 	ft_memcpy(ptr, dynarray->list, dynarray->cell_size * dynarray->nb_cells);
 	free(dynarray->list);
-	dynarray->list = NULL;
 	dynarray->list = ptr;
 	dynarray->byte_size = new_byte_size;
 	return (0);
@@ -40,8 +38,7 @@ int	dynarray_extract(t_dynarray *darr, uint64_t index, uint64_t nb_ext)
 	void		*ptr;
 	uint64_t	cell_size;
 
-	if (!darr || !darr->nb_cells || !nb_ext
-		|| index + 1 > darr->nb_cells || nb_ext + index > darr->nb_cells)
+	if (!darr || !darr->nb_cells || !nb_ext || nb_ext + index > darr->nb_cells)
 		return (-1);
 	if (index == darr->nb_cells || index + nb_ext == darr->nb_cells)
 		pop_dynarray(darr, nb_ext, false);
@@ -63,7 +60,7 @@ int	dyn_insr(t_dynarray *darr, void *ncells, uint64_t index, uint64_t nb_ncells)
 	uint64_t	cl_s;
 	uint64_t	lf_cl_s;
 
-	if (darr == NULL || index == 0)
+	if (index == 0)
 		if ((push_dynarray(darr, ncells, nb_ncells, true)))
 			return (-1);
 	if (index == darr->nb_cells)
@@ -71,7 +68,7 @@ int	dyn_insr(t_dynarray *darr, void *ncells, uint64_t index, uint64_t nb_ncells)
 			return (-1);
 	if (index != darr->nb_cells && index != 0)
 	{
-		if (!ncells || index + 1 > darr->nb_cells || !nb_ncells)
+		if (!darr || !ncells || index + 1 > darr->nb_cells || !nb_ncells)
 			return (-1);
 		cl_s = darr->cell_size;
 		lf_cl_s = (darr->nb_cells - index) * cl_s;

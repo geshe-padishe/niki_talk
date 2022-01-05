@@ -6,15 +6,16 @@ void	sig1_handler(int i)
 {
 	(void)i;
 	c.character |= (000000001 << c.index);
-	printf("c.d = %d ", c.character);
-	printf("c = %c ", c.character);
-	printf("index = %d", c.index);
-	printf(" SIG1\n");
+//	printf("c.d = %d ", c.character);
+//	printf("c = %c ", c.character);
+//	printf("index = %d", c.index);
+//	printf(" SIG1\n");
 	c.index++;
 	if (c.index == 7)
 	{
-		printf("FINAL D = %d ", c.character);
-		printf("FINAL C = %c\n", c.character);
+//		printf("FINAL D = %d ", c.character);
+//		printf("FINAL C = %c\n", c.character);
+		write(1, &c.character, 1);
 		push_dynarray(c.darr, &c.character, 1, 0);
 		c.character = 0;
 		c.index = 0;
@@ -24,15 +25,16 @@ void	sig1_handler(int i)
 void	sig2_handler(int i)
 {
 	(void)i;
-	printf("c.d = %d ", c.character);
-	printf("c = %c ", c.character);
-	printf("index = %d", c.index);
-	printf(" SIG2\n");
+//	printf("c.d = %d ", c.character);
+//	printf("c = %c ", c.character);
+//	printf("index = %d", c.index);
+//	printf(" SIG2\n");
 	c.index++;
 	if (c.index == 7)
 	{
-		printf("FINAL D = %d ", c.character);
-		printf("FINAL C = %c\n", c.character);
+//		printf("FINAL D = %d ", c.character);
+//		printf("FINAL C = %c\n", c.character);
+		write(1, &c.character, 1);
 		push_dynarray(c.darr, &c.character, 1, 0);
 		c.character = 0;
 		c.index = 0;
