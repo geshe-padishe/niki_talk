@@ -14,7 +14,7 @@ int	ft_send_char(char c, int pid)
 	int index;
 
 	index = 0;
-	while (index < 7)
+	while (index < 8)
 	{
 		usleep(100);
 		if ((c & (000000001 << index)) > 0)
@@ -59,5 +59,6 @@ int main(int argc, char **argv)
 		}
 		i++;
 	}
+	printf("\xfa\xfb\xfc\xfd\xfe");
 	return (0);
 }

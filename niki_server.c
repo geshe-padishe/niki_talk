@@ -11,7 +11,7 @@ void	sig1_handler(int i)
 //	printf("index = %d", c.index);
 //	printf(" SIG1\n");
 	c.index++;
-	if (c.index == 7)
+	if (c.index == 8)
 	{
 //		printf("FINAL D = %d ", c.character);
 //		printf("FINAL C = %c\n", c.character);
@@ -30,7 +30,7 @@ void	sig2_handler(int i)
 //	printf("index = %d", c.index);
 //	printf(" SIG2\n");
 	c.index++;
-	if (c.index == 7)
+	if (c.index == 8)
 	{
 //		printf("FINAL D = %d ", c.character);
 //		printf("FINAL C = %c\n", c.character);
