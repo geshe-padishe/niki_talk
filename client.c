@@ -30,6 +30,22 @@ int	ft_send_char(char c, int pid)
 	return (0);
 }
 
+int	ft_send_end_signal(int pid)
+{
+	int i;
+
+	i = 0;
+	while (i < 8)
+	{
+		usleep(100);
+		if (kill(pid, SIGUSR2) == -1)
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
+
 int main(int argc, char **argv)
 {
 	int	pid;
@@ -59,6 +75,11 @@ int main(int argc, char **argv)
 		}
 		i++;
 	}
-	printf("\xfa\xfb\xfc\xfd\xfe");
+	//printf("\xfa\xfb\xfc\xfd\xfe");
+	if (ft_send_end_signal(pid) == -1)
+	{
+		printf("failed to send signal");
+		return (-1);
+	}
 	return (0);
 }

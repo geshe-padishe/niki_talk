@@ -2,9 +2,25 @@
 
 t_character	c;
 
+void	ft_print_string()
+{
+	int i;
+
+	i = 0;
+	while (c.darr->nb_cells > i)
+	{
+		write(1, &((char *)c.darr->list)[i], 1);
+		i++;
+	}
+	free_dynarray(c.darr);
+}
+
 void	sig1_handler(int i)
 {
 	(void)i;
+	if (c.darr->list == NULL)
+		if (init_dynarray(c.darr, 10, 1) == -1)
+			printf("malloc error");
 	c.character |= (000000001 << c.index);
 //	printf("c.d = %d ", c.character);
 //	printf("c = %c ", c.character);
@@ -15,8 +31,8 @@ void	sig1_handler(int i)
 	{
 //		printf("FINAL D = %d ", c.character);
 //		printf("FINAL C = %c\n", c.character);
-		write(1, &c.character, 1);
-		push_dynarray(c.darr, &c.character, 1, 0);
+		if (push_dynarray(c.darr, &c.character, 1, 0) == -1)
+			printf("malloc error");
 		c.character = 0;
 		c.index = 0;
 	}
@@ -34,8 +50,12 @@ void	sig2_handler(int i)
 	{
 //		printf("FINAL D = %d ", c.character);
 //		printf("FINAL C = %c\n", c.character);
-		write(1, &c.character, 1);
-		push_dynarray(c.darr, &c.character, 1, 0);
+		printf("bug");
+		if (c.character == 0)
+			ft_print_string();
+		else
+			if (push_dynarray(c.darr, &c.character, 1, 0) == -1)
+				printf("malloc error");
 		c.character = 0;
 		c.index = 0;
 	}
@@ -67,11 +87,6 @@ int	main(int argc, char **argv)
 	signal(SIGUSR2, sig2_handler);
 
 	printf("\npid = %d\n", getpid());
-//	while (c.darr->nb_cells > i)
-//	{
-//		printf("%c\n", ((char *)c.darr->list)[i]);
-//		i++;
-//	}
 	while (1);
 	return (0);
 }

@@ -13,8 +13,8 @@
 typedef struct s_character
 {
 	t_dynarray	*darr;
-	int		index;
-	char	character;
+	int			index;
+	char		character;
 }				t_character;
 
 #endif
