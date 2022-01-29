@@ -6,7 +6,7 @@
 /*   By: ngenadie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 22:01:44 by ngenadie          #+#    #+#             */
-/*   Updated: 2022/01/25 00:28:59 by ngenadie         ###   ########.fr       */
+/*   Updated: 2022/01/29 23:59:06 by ngenadie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	ft_itoa(int pid)
 {
 	char	c;
 
-	c = pid % 10 + 48;
-	ft_itoa(pid / 10);
-	if (pid > 0)
-		write(1, &c, 1);
+	c = (pid % 10) + 48;
+	if (pid > 9)
+		ft_itoa(pid / 10);
+	write(1, &c, 1);
 }
 
 void	ft_print_string(void)
@@ -58,6 +58,9 @@ void	sig2_handler(int i)
 {
 	(void)i;
 	g_c.index++;
+	if (g_c.darr->list == NULL)
+		if (init_dynarray(g_c.darr, 10, 1) == -1)
+			return ;
 	if (g_c.index == 8)
 	{
 		if (g_c.character == 0)
@@ -73,6 +76,7 @@ void	sig2_handler(int i)
 int	main(int argc, char **argv)
 {
 	t_dynarray		darr;
+	int				pid;
 
 	(void)argc;
 	(void)argv;
@@ -82,8 +86,9 @@ int	main(int argc, char **argv)
 	init_dynarray(g_c.darr, 10, 1);
 	signal(SIGUSR1, sig1_handler);
 	signal(SIGUSR2, sig2_handler);
-	//ft_itoa(getpid());
-	//printf("\npid = %d\n", getpid());
+	write(1, "pid = ", 6);
+	ft_itoa(getpid());
+	write(1, "\n", 1);
 	while (1)
 		;
 	return (0);
